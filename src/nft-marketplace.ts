@@ -60,25 +60,25 @@ export function handleItemListed(event: ItemListedEvent): void {
   }
 
   if (!activeItem) {
-    new ActiveItem(getIdFromEventParams(event.params.tokenId, event.params.nft))
+    activeItem = new ActiveItem(getIdFromEventParams(event.params.tokenId, event.params.nft))
   } 
 
   itemListed.seller = event.params.caller
-  activeItem!.seller = event.params.caller
+  activeItem.seller = event.params.caller
 
   itemListed.nftAddress = event.params.nft
-  activeItem!.nftAddress = event.params.nft
+  activeItem.nftAddress = event.params.nft
   
   itemListed.tokenId = event.params.tokenId
-  activeItem!.tokenId = event.params.tokenId
+  activeItem.tokenId = event.params.tokenId
 
   itemListed.price = event.params.price
-  activeItem!.price = event.params.price
+  activeItem.price = event.params.price
 
-  activeItem!.buyer = Address.fromString("0x0000000000000000000000000000000000000000")
+  activeItem.buyer = Address.fromString("0x0000000000000000000000000000000000000000")
 
   itemListed.save()
-  activeItem!.save()
+  activeItem.save()
 }
 
 function getIdFromEventParams(tokenId: BigInt, nftAddress: Address): string {
